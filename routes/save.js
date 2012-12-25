@@ -20,15 +20,15 @@ exports.save = function(req, res){
 		{
 			var collection;
 			var prsm = req.body;
-			switch (prsm.interest.key) //'dev'
+			switch (prsm.interest.title) //'dev'
 			{
-				case 'share':
+				case 'Shared':
 					collection = db.collection('shared');
 					break;
-				case 'recommend':
+				case 'Recommended':
 					collection = db.collection('recommended');
 					break;
-				case 'save':
+				case 'Saved':
 					collection = db.collection('saved');
 					break;
 				default:
