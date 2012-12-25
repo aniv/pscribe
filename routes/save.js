@@ -43,5 +43,6 @@ exports.save = function(req, res){
 				res.send("{'Status': 'OK'}");
 			}
 		});
+		console.log('Done');
 	});
 }
