@@ -5,6 +5,13 @@ exports.home = function(req, res){
 exports.save = function(req, res){
 	var mongo = require('mongodb').MongoClient;
 	res.set('Content-Type', 'application/json');
+	res.send(process.env.VCAP_SERVICES);
+	console.log(process.env.VCAP_SERVICES);
+	res.send(process.env.VCAP_SERVICES['mongodb-1.8']);
+	console.log(process.env.VCAP_SERVICES['mongodb-1.8']);
+	res.send(process.env.VCAP_SERVICES['mongodb-1.8'][0]);
+	console.log(process.env.VCAP_SERVICES['mongodb-1.8'][0]);
+	
 	mongo_conn = process.env.VCAP_SERVICES['mongodb-1.8'][0]['credentials']['url']; //'mongodb://localhost:27017/prsm'
 
 	mongo.connect(mongo_conn, function(err, db) {
