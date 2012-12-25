@@ -29,9 +29,6 @@ exports.save = function(req, res){
 			case 'save':
 				collection = db.collection('saved');
 				break;
-			case 'dev':
-				collection = db.collection('prsm');
-				break;
 			default:
 				collection = db.collection('default');
 		}
