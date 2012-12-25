@@ -5,13 +5,7 @@ exports.home = function(req, res){
 exports.save = function(req, res){
 	var mongo = require('mongodb').MongoClient;
 	res.set('Content-Type', 'application/json');
-	// res.send(process.env.VCAP_SERVICES);
-	// console.log(process.env.VCAP_SERVICES);
-	// res.send(process.env.VCAP_SERVICES['mongodb-1.8']);
-	// console.log(process.env.VCAP_SERVICES['mongodb-1.8']);
-	// res.send(process.env.VCAP_SERVICES['mongodb-1.8'][0]);
-	// console.log(process.env.VCAP_SERVICES['mongodb-1.8'][0]);
-	
+
 	mongo_conn = JSON.parse(process.env.VCAP_SERVICES)['mongodb-1.8'][0]['credentials']['url']; //'mongodb://localhost:27017/prsm'
 
 	mongo.connect(mongo_conn, function(err, db) {
@@ -21,9 +15,10 @@ exports.save = function(req, res){
 		}
 		
 		var prsm = req.body;
+		var docs = prsm.docs;
 		var collection;
 		
-		switch ('dev') //prsm.interest.key
+		switch (prsm.interest.key) //'dev'
 		{
 			case 'share':
 				collection = db.collection('shared');
@@ -41,7 +36,7 @@ exports.save = function(req, res){
 				collection = db.collection('default');
 		}
 		
-		collection.insert(prsm.docs, {safe:false}, function(err, result) { 
+		collection.insert(docs, {safe:false}, function(err, result) { 
 			if (err) { 
 				console.log("Failed to save records"); 
 				res.send("{'Status': 'ERROR'}");
