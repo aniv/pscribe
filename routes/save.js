@@ -5,8 +5,10 @@ exports.home = function(req, res){
 exports.save = function(req, res){
 	var mongo = require('mongodb').MongoClient;
 	res.set('Content-Type', 'application/json');
+	
+	mongo_conn = process.env.VCAP_SERVICES['mongodb-1.8'].credentials.url; //'mongodb://localhost:27017/prsm'
 
-	mongo.connect('mongodb://localhost:27017/prsm', function(err, db) {
+	mongo.connect(mongo_conn, function(err, db) {
 		if (err) {
 			console.log("Unable to connect to db; error: ");
 			console.dir(err);
