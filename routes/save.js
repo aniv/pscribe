@@ -14,7 +14,7 @@ exports.save = function(req, res){
 		if (err) {
 			console.log("Unable to connect to db; error: ");
 			console.dir(err);
-			res.send("{'Status': 'FATAL'}");
+			res.send('{"Status": "FATAL"}');
 		}
 		else
 		{
@@ -44,17 +44,17 @@ exports.save = function(req, res){
 					collection.insert(docs, {safe:false}, function(err, result) { 
 						if (err) { 
 							console.log("Failed to save articles"); 
-							res.send("{'Status': 'ERROR'}");
+							res.send('{"Status": "ERROR"}');
 						}
 						else {
 							console.log("Saved all articles");
-							res.send("{'Status': 'OK'}");
+							res.send('{"Status": "OK"}');
 						}
 					});
 				}
 				else {
 					console.log("Duplicate article set found for key: " + start); 
-					res.send("{'Status': 'DONE'}");
+					res.send('{"Status": "DONE"}');
 				}
 			});
 		
